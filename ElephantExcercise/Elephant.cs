@@ -10,12 +10,23 @@ namespace ElephantExcercise
     {
         public string Name;
         public int EarSize;
-
+        /// <summary>
+        /// Greets the reader with the name and Earsize.
+        /// </summary>
         public void WhoAmI()
         {            
             Console.WriteLine($"My name is {Name}");
             Console.WriteLine($"My ears are {EarSize} inches tall");
         }
-        
+        public void HearMessage(string message, Elephant whoSaidIt)
+        {
+            Console.WriteLine($"{Name} heard a message");
+            Console.WriteLine($"{whoSaidIt.Name} said this: {message}");
+        }
+
+        public void SpeakTo(Elephant whoToTalkTo, string message)
+        {
+            whoToTalkTo.HearMessage(message, this);
+        }
     }
 }
