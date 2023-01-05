@@ -8,31 +8,69 @@ namespace ElephantExcercise
 {
     internal class Program
     {
-
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Elephant[] elephants = new Elephant[7];
-            elephants[0] = new Elephant() { Name = "Lloyd", EarSize = 40 };
-            elephants[1] = new Elephant() { Name = "Lucinda", EarSize = 33 };
-            elephants[2] = new Elephant() { Name = "Larry", EarSize = 42 };
-            elephants[3] = new Elephant() { Name = "Lucille", EarSize = 32 };
-            elephants[4] = new Elephant() { Name = "Lars", EarSize = 44 };
-            elephants[5] = new Elephant() { Name = "Linda", EarSize = 37 };
-            elephants[6] = new Elephant() { Name = "Humphrey", EarSize = 45 };
 
-            Elephant biggestEars = elephants[0];
-            for(int i = 1; i < elephants.Length; i++)
+            Elephant lucinda = new Elephant() { Name = "Lucinda", EarSize = 33 };
+            Elephant lloyd = new Elephant() { Name = "Lloyd", EarSize = 40 };
+
+            Console.WriteLine("Press 1 for Lloyd, 2 for Lucinda, 3 to swap, 4 to Lloyd mess with Lucinda, 5 to greet Lloyd ");
+            while (true)
             {
-                Console.Write($"Iteration #{i} ");
-
-                if (elephants[i].EarSize > biggestEars.EarSize)
+                string line = Console.ReadLine();
+                Console.WriteLine($"You pressed {line}.");
+                if (int.TryParse(line, out int selection))
                 {
-                    biggestEars = elephants[i];
+                    if (selection == 1)
+                    {
+                        Console.WriteLine("You Pressed 1");
+                        Console.WriteLine("Calling lloyd.WhoAmI()");
+                        lloyd.WhoAmI();
+
+                    }
+                    else if (selection == 2)
+                    {
+                        Console.WriteLine("You Pressed 2");
+                        Console.WriteLine("Calling lucinda.WhoAmI");
+                        lucinda.WhoAmI();
+                    }
+                    else if (selection == 3)
+                    {
+                        Console.WriteLine("You have pressed 3");
+                        Console.WriteLine("References have been swapped");
+                        Swap();
+                    }
+                    else if (selection == 4)
+                    {
+                        lloyd = lucinda;
+                        lloyd.EarSize = 4321;
+                        lloyd.WhoAmI();
+
+                    }
+                    else if (selection == 5)
+                    {
+                        lucinda.SpeakTo(lloyd, "Hi, Lloyd!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("bye");
+                        return;
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("Please enter a valid number.");
+                }
+                void Swap()
+                {
+                    Elephant swap;
 
-                Console.WriteLine(biggestEars.EarSize.ToString());
+                    swap = lucinda;
+                    lucinda = lloyd;
+                    lloyd = swap;
+                }
             }
-        }        
 
+        }
     }
 }
